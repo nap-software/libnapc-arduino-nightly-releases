@@ -27,5 +27,5 @@ const char *napc_version(void) {
 
 
 const char *napc_getFullVersion(void) {
-	return "24.03.2022 00:20:24 c0d10e81cb505e608ebf38bb597525cc05fd89f7";
+	return "24.03.2022 00:23:12 c0d10e81cb505e608ebf38bb597525cc05fd89f7";
 }

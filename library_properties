@@ -1,5 +1,5 @@
 name=libnapc-nightly
-version=4.0.0
+version=5.0.0
 author=NAP-Software
 maintainer=NAP-Software <info@nap.software>
 sentence=libnapc implementation.
