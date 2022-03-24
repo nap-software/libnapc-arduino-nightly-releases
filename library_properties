@@ -1,9 +1,9 @@
 name=libnapc-nightly
-version=2.0.0
+version=3.0.0
 author=NAP-Software
 maintainer=NAP-Software <info@nap.software>
 sentence=libnapc implementation.
-paragraph=Version: nightly-e291c18
+paragraph=Version: nightly-c0d10e8
 category=Other
 url=https://libnapc.nap.software/
 architectures=samd
