@@ -21,11 +21,11 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-const char *napc_version(void) {
-	return "nightly-aaa6fcb";
-}
+#if !defined(PV_NAPC_MODULE_SHA_h)
+	#define PV_NAPC_MODULE_SHA_h
 
+	#include <module/sha/sha.h>
 
-const char *napc_getFullVersion(void) {
-	return "24.03.2022 23:53:33 aaa6fcbb7f563f1604f4222fbda7624d55465fee";
-}
+	#include <module/hmac/_private/h5p9sl/_sha256.h>
+	#include <module/writer/writer.h>
+#endif
