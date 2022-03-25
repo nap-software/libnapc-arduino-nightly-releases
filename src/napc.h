@@ -50,10 +50,10 @@
 * 
 * Reference at https://libnapc.nap-software/
 * 
-* Version    : nightly-aaa6fcb
+* Version    : nightly-cd7bd81
 * Git branch : nightly
-* Git head   : aaa6fcbb7f563f1604f4222fbda7624d55465fee
-* Build date : 24.03.2022 23:53:33
+* Git head   : cd7bd81fb6e18ad97ef05551b92af8de86687294
+* Build date : 25.03.2022 00:08:18
 */
 #if !defined(NAPC_h)
 	#define NAPC_h
@@ -2141,6 +2141,26 @@
     	 * }
     	 */
     	bool napc_random_getRandomBytes(napc_size n_bytes, napc_u8 *out) NAPC_FN_WARNUNUSED_RET();
+    
+    	/*!
+    	 * @name napc_random_getRandomBytesSync
+    	 * @brief Create random bytes.
+    	 * @version 1.5.0
+    	 * @description
+    	 * Creates `n_bytes` random bytes.
+    	 * @param n_bytes Number of bytes to be generated.
+    	 * @param out Array to store collected bytes.
+    	 * @warning
+    	 * Since this function blocks until enough random data is collected, it is better to use `napc_random_getRandomBytes`.
+    	 * @changelog 1.5.0 25.03.2022 initial version
+    	 * @example
+    	 * napc_u8 random_bytes[32];
+    	 * 
+    	 * napc_random_getRandomBytesSync(random_bytes, sizeof(random_bytes));
+    	 * 
+    	 * // random_bytes now contains 32 random bytes
+    	 */
+    	void napc_random_getRandomBytesSync(napc_size n_bytes, napc_u8 *out);
     #endif
 
 /* original: #include <module/parser/parser.h> */
@@ -2572,12 +2592,17 @@
     	 * char message[32];
     	 * napc_u8 iv[16] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
     	 * const char *key = "secret";
+    	 * char key_hashed[65];
     	 * 
-    	 * napc_mzero(message, sizeof(message));
+    	 * if (napc_sha_calculate(key, napc_strlen(key), key_hashed, sizeof(key_hashed))) {
+    	 *     napc_mzero(message, sizeof(message));
     	 * 
-    	 * napc_strncpy(message, "Hello, World!", sizeof(message));
+    	 *     napc_strncpy(message, "Hello, World!", sizeof(message));
     	 * 
-    	 * napc_aes_encrypt(iv, key, message, sizeof(message));
+    	 *     if (napc_aes_encrypt(iv, key_hashed, message, sizeof(message))) {
+    	 *         // message is now encrypted
+    	 *     }
+    	 * }
     	 */
     	bool napc_aes_encrypt(
     		const napc_u8 *iv,
