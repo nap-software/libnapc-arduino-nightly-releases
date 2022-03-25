@@ -50,10 +50,10 @@
 * 
 * Reference at https://libnapc.nap-software/
 * 
-* Version    : nightly-cd7bd81
+* Version    : nightly-3d90965
 * Git branch : nightly
-* Git head   : cd7bd81fb6e18ad97ef05551b92af8de86687294
-* Build date : 25.03.2022 00:08:18
+* Git head   : 3d90965f03740d451d88792509d17749354b58ed
+* Build date : 25.03.2022 00:30:19
 */
 #if !defined(NAPC_h)
 	#define NAPC_h
@@ -2590,9 +2590,14 @@
     	 * @changelog 1.0.0 17.02.2022 initial version
     	 * @example
     	 * char message[32];
-    	 * napc_u8 iv[16] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
+    	 * napc_u8 iv[16];
     	 * const char *key = "secret";
     	 * char key_hashed[65];
+    	 * 
+    	 * // initialize IV with random bytes
+    	 * // note that napc_random_getRandomBytesSync() is used here for simplicity
+    	 * // it is better to use napc_random_getRandomBytes().
+    	 * napc_random_getRandomBytesSync(sizeof(iv), iv);
     	 * 
     	 * if (napc_sha_calculate(key, napc_strlen(key), key_hashed, sizeof(key_hashed))) {
     	 *     napc_mzero(message, sizeof(message));
@@ -2601,6 +2606,17 @@
     	 * 
     	 *     if (napc_aes_encrypt(iv, key_hashed, message, sizeof(message))) {
     	 *         // message is now encrypted
+    	 *         napc_printf("Message encrypted\n");
+    	 * 
+    	 *         napc_printf("Key: %s\n", key_hashed);
+    	 * 
+    	 *         napc_printf("IV: ");
+    	 *         napc_misc_printHexArray(iv, sizeof(iv));
+    	 *         napc_printf("\n");
+    	 * 
+    	 *         napc_printf("Ciphertext: ");
+    	 *         napc_misc_printHexArray(message, sizeof(message));
+    	 *         napc_printf("\n");
     	 *     }
     	 * }
     	 */
@@ -2733,6 +2749,23 @@
 
 /* original: #include <string.h> // memcmp(), memcpy() etc. */
     #include <string.h> // memcmp(), memcpy() etc.
+    
+    	/*!
+    	 * @name napc_misc_printHexArray
+    	 * @brief Print an array of integers
+    	 * @version 1.5.0
+    	 * @rationale
+    	 * It's cumbersome to write a loop for printing out hex arrays.
+    	 * @param bytes Bytes array.
+    	 * @param n_bytes Size of bytes array.
+    	 * @changelog 1.5.0 25.03.2022 initial version
+    	 * @example
+    	 * napc_u8 array[4] = {0xde, 0xad, 0xbe, 0xef};
+    	 * 
+    	 * // prints deadbeef
+    	 * napc_misc_printHexArray(array, sizeof(array));
+    	 */
+    	void napc_misc_printHexArray(const void *bytes, napc_size n_bytes);
     
     	/*!
     	 * @name napc_misc_shiftArrayRight

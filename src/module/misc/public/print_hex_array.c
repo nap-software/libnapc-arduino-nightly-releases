@@ -21,11 +21,12 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#if !defined(PV_NAPC_MODULE_MISC_h)
-	#define PV_NAPC_MODULE_MISC_h
+#include <module/misc/_private/_misc.h>
 
-	#include <module/misc/misc.h>
-	#include <module/misc/_private/_log.h>
+void napc_misc_printHexArray(const void *bytes, napc_size n_bytes) {
+	const unsigned char *data = bytes;
 
-	#include <napc-serial/napc-serial.h> // napc_printf()
-#endif
+	for (napc_size i = 0; i < n_bytes; ++i) {
+		napc_printf("%2.2x", data[i]);
+	}
+}
