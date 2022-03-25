@@ -50,10 +50,10 @@
 * 
 * Reference at https://libnapc.nap-software/
 * 
-* Version    : nightly-3d90965
+* Version    : nightly-077490b
 * Git branch : nightly
-* Git head   : 3d90965f03740d451d88792509d17749354b58ed
-* Build date : 25.03.2022 00:30:19
+* Git head   : 077490b529f902a76c5b49b7797388b18a06c616
+* Build date : 25.03.2022 01:04:53
 */
 #if !defined(NAPC_h)
 	#define NAPC_h
@@ -2599,14 +2599,22 @@
     	 * // it is better to use napc_random_getRandomBytes().
     	 * napc_random_getRandomBytesSync(sizeof(iv), iv);
     	 * 
+    	 * // since napc_aes_encrypt() expects a HEX formatted key string
+    	 * // we simply calculate the SHA256 hash of the key
+    	 * // which is guaranteed to be a 32 byte hex formatted string.
     	 * if (napc_sha_calculate(key, napc_strlen(key), key_hashed, sizeof(key_hashed))) {
+    	 *     // set all bytes in message to zero
+    	 *     // napc_aes_encrypt() always needs the input buffer's size to be 
+    	 *     // a multiple of 16. This way unused bytes are always zero.
     	 *     napc_mzero(message, sizeof(message));
     	 * 
+    	 *     // copy a message
     	 *     napc_strncpy(message, "Hello, World!", sizeof(message));
     	 * 
+    	 *     // do the encryption
     	 *     if (napc_aes_encrypt(iv, key_hashed, message, sizeof(message))) {
     	 *         // message is now encrypted
-    	 *         napc_printf("Message encrypted\n");
+    	 *         napc_printf("Message encrypted!\n");
     	 * 
     	 *         napc_printf("Key: %s\n", key_hashed);
     	 * 
