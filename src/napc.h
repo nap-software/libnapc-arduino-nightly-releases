@@ -50,10 +50,10 @@
 * 
 * Reference at https://libnapc.nap-software/
 * 
-* Version    : nightly-077490b
+* Version    : nightly-d45ceb6
 * Git branch : nightly
-* Git head   : 077490b529f902a76c5b49b7797388b18a06c616
-* Build date : 25.03.2022 01:04:53
+* Git head   : d45ceb6100adfe91d01d6796d9a2351512fb1269
+* Build date : 25.03.2022 19:42:48
 */
 #if !defined(NAPC_h)
 	#define NAPC_h
@@ -1744,7 +1744,8 @@
         	 * Is used for structs that are allocated on the stack and have an
         	 * _init() function.
         	 */
-        	#define NAPC_MAGIC_napc__Timer                           NAPC_U32_LITERAL(0x837f4521)
+        	#define NAPC_MAGIC_napc__OSTimer                         NAPC_U32_LITERAL(0x831f4521)
+        	#define NAPC_MAGIC_napc__Timer                           NAPC_U32_LITERAL(0x2f1fa628)
         	#define NAPC_MAGIC_napc__Pool                            NAPC_U32_LITERAL(0xd3d0df2a)
         
         	#define NAPC_MAGIC_napc__Buffer                          NAPC_U32_LITERAL(0x7beccbe2)
@@ -1946,6 +1947,127 @@
     // maybe release -> releaseElement (release is ambig)
     // 
 
+/* original: #include <module/os-timer/os-timer.h> */
+    /*
+    * MIT License
+    * 
+    * Copyright (c) 2022 nap.software
+    * 
+    * Permission is hereby granted, free of charge, to any person obtaining a copy
+    * of this software and associated documentation files (the "Software"), to deal
+    * in the Software without restriction, including without limitation the rights
+    * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    * copies of the Software, and to permit persons to whom the Software is
+    * furnished to do so, subject to the following conditions:
+    * 
+    * The above copyright notice and this permission notice shall be included in all
+    * copies or substantial portions of the Software.
+    * 
+    * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    * SOFTWARE.
+    */
+    #if !defined(NAPC_MODULE_OSTIMER_h)
+    	#define NAPC_MODULE_OSTIMER_h
+    
+
+/* original: #include <libnapc.h> */
+/* header file already included */
+
+/* original: #include <napc-magic/napc-magic.h> */
+/* header file already included */
+    
+    	/*!
+    	 * @name napc__OSTimer
+    	 * @brief Representation of a single shot timer.
+    	 * @version 2.0.0
+    	 * @notes
+    	 * Treat this type as opaque.
+    	 * @changelog 2.0.0 25.03.2022 initial version
+    	 */
+    	typedef struct {
+    		NAPC_MAGIC_MEMBER; // used to detect uninitialized timers
+    
+    		napc_time duration;
+    		napc_time started_at;
+    		bool expired;
+    	} napc__OSTimer;
+    
+    	/*!
+    	 * @name napc_OSTimer_init
+    	 * @brief Initialize a timer.
+    	 * @version 2.0.0
+    	 * @description
+    	 * Initializes a timer with a duration of `duration` milliseconds.
+    	 * @param timer One shot timer to be initialized.
+    	 * @param duration Timer duration in milliseconds.
+    	 * @changelog 2.0.0 25.03.2022 initial version
+    	 * @example
+    	 * napc__OSTimer timer;
+    	 * 
+    	 * napc_OSTimer_init(&timer, 1000); // 1000ms = 1s
+    	 */
+    	void napc_OSTimer_init(napc__OSTimer *timer, napc_time duration);
+    
+    	/*!
+    	 * @name napc_OSTimer_create
+    	 * @brief Create a timer object.
+    	 * @version 2.0.0
+    	 * @description
+    	 * Creates a timer with a duration of `duration` milliseconds.
+    	 * @param duration Timer duration in milliseconds.
+    	 * @changelog 2.0.0 25.03.2022 initial version
+    	 * @example
+    	 * napc__OSTimer timer = napc_OSTimer_create(1000); // 1000ms = 1s
+    	 */
+    	napc__OSTimer napc_OSTimer_create(napc_time duration);
+    
+    	/*!
+    	 * @name napc_OSTimer_start
+    	 * @brief Start a single shot timer.
+    	 * @version 2.0.0
+    	 * @description
+    	 * Starts the single shot timer `timer`.
+    	 * @param timer Timer to start.
+    	 * @changelog 2.0.0 25.03.2022 initial version
+    	 * @example
+    	 * napc__OSTimer timer = napc_OSTimer_create(1000);
+    	 * 
+    	 * napc_OSTimer_start(&timer);
+    	 */
+    	void napc_OSTimer_start(napc__OSTimer *timer);
+    
+    	/*!
+    	 * @name napc_OSTimer_expired
+    	 * @brief Check if a timer has expired.
+    	 * @version 2.0.0
+    	 * @param timer Timer to check.
+    	 * @return Returns `true` if timer expired, `false` otherwise.
+    	 * @notes
+    	 * This function will return `true` only once per started timer.
+    	 * Subsequent calls on the same timer will return `false`.
+    	 * @changelog 2.0.0 25.03.2022 initial version
+    	 */
+    	bool napc_OSTimer_expired(napc__OSTimer *timer) NAPC_FN_WARNUNUSED_RET();
+    
+    	/*!
+    	 * @name napc_OSTimer_restart
+    	 * @brief Restart a timer.
+    	 * @version 2.0.0
+    	 * @param timer Timer to be restarted.
+    	 * @changelog 2.0.0 25.03.2022 initial version
+    	 * @example
+    	 * if (napc_OSTimer_expired(&timer)) {
+    	 *     napc_OSTimer_restart(&timer);
+    	 * }
+    	 */
+    	void napc_OSTimer_restart(napc__OSTimer *timer);
+    #endif
+
 /* original: #include <module/timer/timer.h> */
     /*
     * MIT License
@@ -1983,10 +2105,10 @@
     	/*!
     	 * @name napc__Timer
     	 * @brief Representation of a timer.
-    	 * @version 1.0.0
+    	 * @version 2.0.0
     	 * @notes
     	 * Treat this type as opaque.
-    	 * @changelog 1.0.0 17.02.2022 initial version
+    	 * @changelog 2.0.0 25.03.2022 initial version
     	 */
     	typedef struct {
     		NAPC_MAGIC_MEMBER; // used to detect uninitialized timers
@@ -1999,12 +2121,12 @@
     	/*!
     	 * @name napc_Timer_init
     	 * @brief Initialize a timer.
-    	 * @version 1.0.0
+    	 * @version 2.0.0
     	 * @description
     	 * Initializes a timer with a duration of `duration` milliseconds.
-    	 * @param timer Pointer to `napc__Timer` to be initialized.
+    	 * @param timer Timer to be initialized.
     	 * @param duration Timer duration in milliseconds.
-    	 * @changelog 1.0.0 17.02.2022 initial version
+    	 * @changelog 2.0.0 25.03.2022 initial version
     	 * @example
     	 * napc__Timer timer;
     	 * 
@@ -2015,11 +2137,11 @@
     	/*!
     	 * @name napc_Timer_create
     	 * @brief Create a timer object.
-    	 * @version 1.0.0
+    	 * @version 2.0.0
     	 * @description
     	 * Creates a timer with a duration of `duration` milliseconds.
     	 * @param duration Timer duration in milliseconds.
-    	 * @changelog 1.0.0 17.02.2022 initial version
+    	 * @changelog 2.0.0 25.03.2022 initial version
     	 * @example
     	 * napc__Timer timer = napc_Timer_create(1000); // 1000ms = 1s
     	 */
@@ -2028,11 +2150,11 @@
     	/*!
     	 * @name napc_Timer_start
     	 * @brief Start a timer.
-    	 * @version 1.0.0
+    	 * @version 2.0.0
     	 * @description
     	 * Starts the timer `timer`.
-    	 * @param timer Pointer to `napc__Timer` variable.
-    	 * @changelog 1.0.0 17.02.2022 initial version
+    	 * @param timer Timer to start.
+    	 * @changelog 2.0.0 25.03.2022 initial version
     	 * @example
     	 * napc__Timer timer = napc_Timer_create(1000);
     	 * 
@@ -2043,22 +2165,22 @@
     	/*!
     	 * @name napc_Timer_expired
     	 * @brief Check if a timer has expired.
-    	 * @version 1.0.0
-    	 * @param timer Pointer to `napc__Timer` variable.
+    	 * @version 2.0.0
+    	 * @param timer Timer to check.
     	 * @return Returns `true` if timer expired, `false` otherwise.
     	 * @notes
-    	 * This function will return `true` only once per started timer.
-    	 * Subsequent calls on the same timer will return `false`.
-    	 * @changelog 1.0.0 17.02.2022 initial version
+    	 * After the timer expired this function will always return `true`
+    	 * until timer is restarted with `napc_Timer_restart`.
+    	 * @changelog 2.0.0 25.03.2022 initial version
     	 */
     	bool napc_Timer_expired(napc__Timer *timer) NAPC_FN_WARNUNUSED_RET();
     
     	/*!
     	 * @name napc_Timer_restart
     	 * @brief Restart a timer.
-    	 * @version 1.0.0
-    	 * @param timer Pointer to napc__Timer variable.
-    	 * @changelog 1.0.0 17.02.2022 initial version
+    	 * @version 2.0.0
+    	 * @param timer Timer to be restarted.
+    	 * @changelog 2.0.0 25.03.2022 initial version
     	 * @example
     	 * if (napc_Timer_expired(&timer)) {
     	 *     napc_Timer_restart(&timer);

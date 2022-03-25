@@ -21,11 +21,12 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-const char *napc_version(void) {
-	return "nightly-d45ceb6";
-}
+#include <module/os-timer/_private/_os-timer.h>
 
+napc__OSTimer napc_OSTimer_create(napc_time duration) {
+	napc__OSTimer timer;
 
-const char *napc_getFullVersion(void) {
-	return "25.03.2022 19:42:48 d45ceb6100adfe91d01d6796d9a2351512fb1269";
+	napc_OSTimer_init(&timer, duration);
+
+	return timer;
 }
