@@ -50,10 +50,10 @@
 * 
 * Reference at https://libnapc.nap-software/
 * 
-* Version    : nightly-d45ceb6
+* Version    : nightly-63502a3
 * Git branch : nightly
-* Git head   : d45ceb6100adfe91d01d6796d9a2351512fb1269
-* Build date : 25.03.2022 19:42:48
+* Git head   : 63502a3a6b992898d6d2cbc16361da6811ddea51
+* Build date : 26.03.2022 21:20:03
 */
 #if !defined(NAPC_h)
 	#define NAPC_h
