@@ -21,6 +21,10 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
+/*!
+ * @name OSTimer:intro
+ * @brief One-Shot timer
+ */
 #if !defined(NAPC_MODULE_OSTIMER_h)
 	#define NAPC_MODULE_OSTIMER_h
 

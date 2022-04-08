@@ -21,6 +21,10 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
+/*!
+ * @name Writer:intro
+ * @brief Binary buffer writer
+ */
 #if !defined(NAPC_MODULE_WRITER_h)
 	#define NAPC_MODULE_WRITER_h
 

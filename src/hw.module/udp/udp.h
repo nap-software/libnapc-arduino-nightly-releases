@@ -23,7 +23,7 @@
 */
 /*!
  * @name UDP:intro
- * @brief UDP Functionality
+ * @brief Send & receive network packets
  * @description
  * Used to send and/or receive IP packets over the UDP protocol.
  * @example

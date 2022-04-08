@@ -21,6 +21,10 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
+/*!
+ * @name aes:intro
+ * @brief Encrypt & decrypt messages
+ */
 #if !defined(NAPC_MODULE_AES_h)
 	#define NAPC_MODULE_AES_h
 

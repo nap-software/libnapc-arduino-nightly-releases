@@ -21,6 +21,10 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
+/*!
+ * @name random:intro
+ * @brief Random number generation
+ */
 #if !defined(NAPC_MODULE_RANDOM_h)
 	#define NAPC_MODULE_RANDOM_h
 

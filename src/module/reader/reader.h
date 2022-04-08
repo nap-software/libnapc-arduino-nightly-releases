@@ -21,6 +21,10 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
+/*!
+ * @name Reader:intro
+ * @brief Binary buffer reader
+ */
 #if !defined(NAPC_MODULE_READER_h)
 	#define NAPC_MODULE_READER_h
 

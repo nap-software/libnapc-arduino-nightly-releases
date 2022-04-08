@@ -21,6 +21,10 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
+/*!
+ * @name Pool:intro
+ * @brief Static memory allocation
+ */
 #if !defined(NAPC_MODULE_POOL_h)
 	#define NAPC_MODULE_POOL_h
 

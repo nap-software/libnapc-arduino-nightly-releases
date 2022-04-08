@@ -21,6 +21,10 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
+/*!
+ * @name hmac:intro
+ * @brief Sign & verify messages
+ */
 #if !defined(NAPC_MODULE_HMAC_h)
 	#define NAPC_MODULE_HMAC_h
 

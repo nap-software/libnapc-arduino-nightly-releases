@@ -50,10 +50,10 @@
 * 
 * Reference at https://libnapc.nap-software/
 * 
-* Version    : nightly-4f4ea90
+* Version    : nightly-31e92c2
 * Git branch : nightly
-* Git head   : 4f4ea902c57725df58a1de7fe08dc23c9b05b26f
-* Build date : 27.03.2022 00:30:46
+* Git head   : 31e92c29cbb4222de064514e3a58cbc1ec89e87c
+* Build date : 08.04.2022 02:52:54
 */
 #if !defined(NAPC_h)
 	#define NAPC_h
@@ -1674,6 +1674,10 @@
     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     * SOFTWARE.
     */
+    /*!
+     * @name Pool:intro
+     * @brief Static memory allocation
+     */
     #if !defined(NAPC_MODULE_POOL_h)
     	#define NAPC_MODULE_POOL_h
     
@@ -1971,6 +1975,10 @@
     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     * SOFTWARE.
     */
+    /*!
+     * @name OSTimer:intro
+     * @brief One-Shot timer
+     */
     #if !defined(NAPC_MODULE_OSTIMER_h)
     	#define NAPC_MODULE_OSTIMER_h
     
@@ -2213,6 +2221,10 @@
     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     * SOFTWARE.
     */
+    /*!
+     * @name random:intro
+     * @brief Random number generation
+     */
     #if !defined(NAPC_MODULE_RANDOM_h)
     	#define NAPC_MODULE_RANDOM_h
     
@@ -2309,6 +2321,10 @@
     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     * SOFTWARE.
     */
+    /*!
+     * @name parser:intro
+     * @brief String parsing
+     */
     #if !defined(NAPC_MODULE_PARSER_h)
     	#define NAPC_MODULE_PARSER_h
     
@@ -2691,6 +2707,10 @@
     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     * SOFTWARE.
     */
+    /*!
+     * @name aes:intro
+     * @brief Encrypt & decrypt messages
+     */
     #if !defined(NAPC_MODULE_AES_h)
     	#define NAPC_MODULE_AES_h
     
@@ -2801,6 +2821,10 @@
     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     * SOFTWARE.
     */
+    /*!
+     * @name hmac:intro
+     * @brief Sign & verify messages
+     */
     #if !defined(NAPC_MODULE_HMAC_h)
     	#define NAPC_MODULE_HMAC_h
     
@@ -2994,6 +3018,10 @@
     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     * SOFTWARE.
     */
+    /*!
+     * @name Reader:intro
+     * @brief Binary buffer reader
+     */
     #if !defined(NAPC_MODULE_READER_h)
     	#define NAPC_MODULE_READER_h
     
@@ -3267,6 +3295,10 @@
     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     * SOFTWARE.
     */
+    /*!
+     * @name Writer:intro
+     * @brief Binary buffer writer
+     */
     #if !defined(NAPC_MODULE_WRITER_h)
     	#define NAPC_MODULE_WRITER_h
     
@@ -4316,7 +4348,7 @@
     */
     /*!
      * @name UDP:intro
-     * @brief UDP Functionality
+     * @brief Send & receive network packets
      * @description
      * Used to send and/or receive IP packets over the UDP protocol.
      * @example
@@ -4636,6 +4668,10 @@
     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     * SOFTWARE.
     */
+    /*!
+     * @name fs:intro
+     * @brief Write & read files
+     */
     #if !defined(NAPC_HW_MODULE_FS_h)
     	#define NAPC_HW_MODULE_FS_h
     

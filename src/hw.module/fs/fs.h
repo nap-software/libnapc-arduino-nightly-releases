@@ -21,6 +21,10 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
+/*!
+ * @name fs:intro
+ * @brief Write & read files
+ */
 #if !defined(NAPC_HW_MODULE_FS_h)
 	#define NAPC_HW_MODULE_FS_h
 
