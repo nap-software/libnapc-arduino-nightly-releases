@@ -22,10 +22,10 @@
 * SOFTWARE.
 */
 const char *napc_version(void) {
-	return "nightly-b5fa5b9";
+	return "nightly-65dec94";
 }
 
 
 const char *napc_getFullVersion(void) {
-	return "09.04.2022 01:59:23 b5fa5b9bac65f688ee66a096f65b892862f10307";
+	return "09.04.2022 03:14:53 65dec9452089be6ff384fe7eed30e9594e93aa10";
 }
