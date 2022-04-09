@@ -50,10 +50,10 @@
 * 
 * Reference at https://libnapc.nap-software/
 * 
-* Version    : nightly-ffee1cf
+* Version    : nightly-b5fa5b9
 * Git branch : nightly
-* Git head   : ffee1cfaeb99f5c9556c2b24fa8fd9b939c4cabc
-* Build date : 08.04.2022 04:41:51
+* Git head   : b5fa5b9bac65f688ee66a096f65b892862f10307
+* Build date : 09.04.2022 01:59:23
 */
 #if !defined(NAPC_h)
 	#define NAPC_h
@@ -2224,6 +2224,46 @@
     /*!
      * @name random:intro
      * @brief Random number generation
+     * @description
+     * This module provides random number generation suitable for cryptographic purposes.
+     * 
+     * A typical application looks like this:
+     * 
+     * ```c
+     * #include <napc.h>
+     * 
+     * napc_u8 random_bytes[16];
+     * 
+     * void napc_app_setup(const char *platform) {}
+     * 
+     * bool napc_app_loop(napc_time uptime) {
+     * 	// request of 16 random bytes
+     * 	if (napc_random_getRandomBytes(16, random_bytes)) {
+     * 		// do something with random_bytes
+     * 
+     * 		napc_printf("Here are your random numbers: ");
+     * 
+     * 		for (int i = 0; i < 16; ++i) {
+     * 			napc_printf("%2.2x", random_bytes[i]);
+     * 		}
+     * 
+     * 		napc_printf("\n");
+     * 
+     * 		return false;
+     * 	}
+     * 
+     * 	// collect new random data
+     * 	napc_random_collectBytes();
+     * 
+     * 	return true;
+     * }
+     * ```
+     * 
+     * This program will output something similar to:
+     * 
+     * ```
+     * Here are your random numbers: 162109b28bba5eabb17b69d83aeffd84
+     * ```
      */
     #if !defined(NAPC_MODULE_RANDOM_h)
     	#define NAPC_MODULE_RANDOM_h
@@ -2324,6 +2364,22 @@
     /*!
      * @name parser:intro
      * @brief String parsing
+     * @description
+     * This module contains all functions that parse strings.
+     * 
+     * All functions in this module follow the same rules<sup>*</sup>:
+     * 
+     * - The first parameter is always the string to be parsed.
+     * - Every function returns a boolean indicating success or failure.
+     * - It is allowed to pass `NULL` as output. This is useful for checking the format of a string:
+     * 
+     * ```c
+     * if (napc_parser_parseIPv4Address(ip_str, NULL)) {
+     * 	// ip_str is a valid IPv4Address
+     * }
+     * ```
+     * 
+     * > If a function returned `false` the contents of the parsed output is _undefined_.
      */
     #if !defined(NAPC_MODULE_PARSER_h)
     	#define NAPC_MODULE_PARSER_h
@@ -3563,6 +3619,19 @@
     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     * SOFTWARE.
     */
+    /*!
+     * @name IPv4Participant:intro
+     * @description
+     * To reduce parameter count this module is used to combine an IPv4-Address and a port number:
+     * 
+     * ```c
+     * // Holds address for google's DNS server 8.8.8.8:53
+     * napc__IPv4Participant google_dns;
+     * 
+     * // Initialize google_dns variable
+     * napc_IPv4Participant_init(&google_dns, "8.8.8.8", 53);
+     * ```
+     */
     #if !defined(NAPC_MODULE_IPV4PARTICIPANT_h)
     	#define NAPC_MODULE_IPV4PARTICIPANT_h
     
@@ -4068,6 +4137,18 @@
         * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
         * SOFTWARE.
         */
+        /*!
+         * @name Buffer:intro
+         * @description
+         * To reduce parameter count this module is used to pass a buffer with its size to a function:
+         * 
+         * ```c
+         * char data[512];
+         * napc__Buffer buffer;
+         * 
+         * napc_Buffer_init(&buffer, data, sizeof(data));
+         * ```
+         */
         #if !defined(NAPC_MODULE_BUFFER_h)
         	#define NAPC_MODULE_BUFFER_h
         

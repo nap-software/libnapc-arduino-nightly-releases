@@ -21,6 +21,18 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
+/*!
+ * @name Buffer:intro
+ * @description
+ * To reduce parameter count this module is used to pass a buffer with its size to a function:
+ * 
+ * ```c
+ * char data[512];
+ * napc__Buffer buffer;
+ * 
+ * napc_Buffer_init(&buffer, data, sizeof(data));
+ * ```
+ */
 #if !defined(NAPC_MODULE_BUFFER_h)
 	#define NAPC_MODULE_BUFFER_h
 
