@@ -42,6 +42,8 @@
 	 * @param buffer Buffer to write.
 	 * @param buffer_size Size of buffer.
 	 * @return Returns `true` on success, `false` otherwise.
+	 * @notes
+	 * On linux the environment variable `NAPC_FILE_ROOT_PATH` is prepended to `path`.
 	 * @warning This function will always overwrite the previous contents of the file.
 	 * @changelog 1.0.0 17.02.2022 initial version
 	 */
@@ -58,6 +60,8 @@
 	 * @param path File path.
 	 * @param string String to write to file.
 	 * @return Returns `true` on success, `false` otherwise.
+	 * @notes
+	 * On linux the environment variable `NAPC_FILE_ROOT_PATH` is prepended to `path`.
 	 * @warning This function will always overwrite the previous contents of the file.
 	 * @changelog 1.0.0 17.02.2022 initial version
 	 */
@@ -74,6 +78,8 @@
 	 * @param path File path.
 	 * @param buffer Buffer to write to.
 	 * @return Returns `true` on success, `false` otherwise.
+	 * @notes
+	 * On linux the environment variable `NAPC_FILE_ROOT_PATH` is prepended to `path`.
 	 * @changelog 1.0.0 17.02.2022 initial version
 	 */
 	bool napc_fs_readFile(
@@ -90,6 +96,8 @@
 	 * @param buffer Buffer to write to.
 	 * @param buffer_size Size of buffer.
 	 * @return Returns `true` on success, `false` otherwise.
+	 * @notes
+	 * On linux the environment variable `NAPC_FILE_ROOT_PATH` is prepended to `path`.
 	 * @changelog 1.0.0 17.02.2022 initial version
 	 */
 	bool napc_fs_readFileCString(

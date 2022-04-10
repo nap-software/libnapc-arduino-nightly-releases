@@ -50,10 +50,10 @@
 * 
 * Reference at https://libnapc.nap-software/
 * 
-* Version    : nightly-8e8c7d2
+* Version    : nightly-0d2917e
 * Git branch : nightly
-* Git head   : 8e8c7d2cebb15e513dad9782e0dd90ca1d7d4463
-* Build date : 10.04.2022 00:45:48
+* Git head   : 0d2917e64267d940c5da997406da58c3264965dc
+* Build date : 10.04.2022 00:58:02
 */
 #if !defined(NAPC_h)
 	#define NAPC_h
@@ -4661,6 +4661,8 @@
     	 * @param path Path to the file.
     	 * @param mode Mode (`"r"` for reading, `"w"` for writing).
     	 * @return Returns a negative number if file could not be opened.
+    	 * @notes
+    	 * On linux the environment variable `NAPC_FILE_ROOT_PATH` is prepended to `path`.
     	 * @warning
     	 * Opening a file in write mode (`"w"`) will always clear the previous contents of the file.
     	 * @changelog 1.0.0 17.02.2022 initial version
@@ -4774,6 +4776,8 @@
     	 * @param buffer Buffer to write.
     	 * @param buffer_size Size of buffer.
     	 * @return Returns `true` on success, `false` otherwise.
+    	 * @notes
+    	 * On linux the environment variable `NAPC_FILE_ROOT_PATH` is prepended to `path`.
     	 * @warning This function will always overwrite the previous contents of the file.
     	 * @changelog 1.0.0 17.02.2022 initial version
     	 */
@@ -4790,6 +4794,8 @@
     	 * @param path File path.
     	 * @param string String to write to file.
     	 * @return Returns `true` on success, `false` otherwise.
+    	 * @notes
+    	 * On linux the environment variable `NAPC_FILE_ROOT_PATH` is prepended to `path`.
     	 * @warning This function will always overwrite the previous contents of the file.
     	 * @changelog 1.0.0 17.02.2022 initial version
     	 */
@@ -4806,6 +4812,8 @@
     	 * @param path File path.
     	 * @param buffer Buffer to write to.
     	 * @return Returns `true` on success, `false` otherwise.
+    	 * @notes
+    	 * On linux the environment variable `NAPC_FILE_ROOT_PATH` is prepended to `path`.
     	 * @changelog 1.0.0 17.02.2022 initial version
     	 */
     	bool napc_fs_readFile(
@@ -4822,6 +4830,8 @@
     	 * @param buffer Buffer to write to.
     	 * @param buffer_size Size of buffer.
     	 * @return Returns `true` on success, `false` otherwise.
+    	 * @notes
+    	 * On linux the environment variable `NAPC_FILE_ROOT_PATH` is prepended to `path`.
     	 * @changelog 1.0.0 17.02.2022 initial version
     	 */
     	bool napc_fs_readFileCString(
