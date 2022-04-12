@@ -30,4 +30,5 @@ void napc_Writer_init(
 	ctx->data = data;
 	ctx->size = data_size;
 	ctx->_offset = 0;
+	ctx->no_fail_mode = false;
 }

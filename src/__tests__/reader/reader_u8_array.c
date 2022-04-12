@@ -2,7 +2,7 @@
 #include <napc.h>
 #include <napc-testing.h>
 
-void PV_napc_reader__testCase77(void) {
+void PV_napc_reader__testCase78(void) {
     napc_unmute();
     napc_puts("[reader/u8_array.c] should read u8 array correctly ... ");
     napc_mute();
@@ -22,7 +22,7 @@ void PV_napc_reader__testCase77(void) {
 	TEST_ASSERT(!napc_Reader_readU8Array(&ctx, 1, out));
 }
 
-void PV_napc_reader__testCase78(void) {
+void PV_napc_reader__testCase79(void) {
     napc_unmute();
     napc_puts("[reader/u8_array.c] should handle overflow (buffer) correctly ... ");
     napc_mute();

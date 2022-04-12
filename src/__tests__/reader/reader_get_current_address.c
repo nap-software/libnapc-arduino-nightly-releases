@@ -4,7 +4,7 @@
 
 void PV_napc_reader__testCase62(void) {
     napc_unmute();
-    napc_puts("[reader/get_address.c] should work as expected ... ");
+    napc_puts("[reader/get_current_address.c] should work as expected ... ");
     napc_mute();
 	unsigned char buffer[5];
 	unsigned char *start = buffer;

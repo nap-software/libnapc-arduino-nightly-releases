@@ -2,7 +2,7 @@
 #include <napc.h>
 #include <napc-testing.h>
 
-void PV_napc_sha__testCase79(void) {
+void PV_napc_sha__testCase80(void) {
     napc_unmute();
     napc_puts("[sha/basic.c] It should work properly ... ");
     napc_mute();
@@ -22,7 +22,7 @@ void PV_napc_sha__testCase79(void) {
 	);
 }
 
-void PV_napc_sha__testCase80(void) {
+void PV_napc_sha__testCase81(void) {
     napc_unmute();
     napc_puts("[sha/basic.c] It should work with empty string ... ");
     napc_mute();
@@ -42,7 +42,7 @@ void PV_napc_sha__testCase80(void) {
 	);
 }
 
-void PV_napc_sha__testCase81(void) {
+void PV_napc_sha__testCase82(void) {
     napc_unmute();
     napc_puts("[sha/basic.c] It should fail with a too small output buffer ... ");
     napc_mute();

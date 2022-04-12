@@ -2,7 +2,7 @@
 #include <napc.h>
 #include <napc-testing.h>
 
-void PV_napc_writer__testCase83(void) {
+void PV_napc_writer__testCase87(void) {
     napc_unmute();
     napc_puts("[writer/move_current_offset_by_amount.c] should work correctly ... ");
     napc_mute();

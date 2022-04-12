@@ -2,7 +2,7 @@
 #include <napc.h>
 #include <napc-testing.h>
 
-void PV_napc_writer__testCase87(void) {
+void PV_napc_writer__testCase91(void) {
     napc_unmute();
     napc_puts("[writer/u32be.c] should write u32be correctly ... ");
     napc_mute();

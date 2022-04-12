@@ -77,16 +77,20 @@ void PV_napc_reader__testCase75(void);
 void PV_napc_reader__testCase76(void);
 void PV_napc_reader__testCase77(void);
 void PV_napc_reader__testCase78(void);
-void PV_napc_sha__testCase79(void);
+void PV_napc_reader__testCase79(void);
 void PV_napc_sha__testCase80(void);
 void PV_napc_sha__testCase81(void);
-void PV_napc_writer__testCase82(void);
+void PV_napc_sha__testCase82(void);
 void PV_napc_writer__testCase83(void);
 void PV_napc_writer__testCase84(void);
 void PV_napc_writer__testCase85(void);
 void PV_napc_writer__testCase86(void);
 void PV_napc_writer__testCase87(void);
 void PV_napc_writer__testCase88(void);
+void PV_napc_writer__testCase89(void);
+void PV_napc_writer__testCase90(void);
+void PV_napc_writer__testCase91(void);
+void PV_napc_writer__testCase92(void);
 void napc_aes__runTests(void) {
     PV_napc_aes__testCase1(); napc_unmute(); napc_puts("passed!\n"); napc_mute();
     napc_unmute();
@@ -196,26 +200,30 @@ void napc_reader__runTests(void) {
     PV_napc_reader__testCase76(); napc_unmute(); napc_puts("passed!\n"); napc_mute();
     PV_napc_reader__testCase77(); napc_unmute(); napc_puts("passed!\n"); napc_mute();
     PV_napc_reader__testCase78(); napc_unmute(); napc_puts("passed!\n"); napc_mute();
+    PV_napc_reader__testCase79(); napc_unmute(); napc_puts("passed!\n"); napc_mute();
     napc_unmute();
     napc_puts("All reader tests have passed!\n");
     napc_mute();
 }
 void napc_sha__runTests(void) {
-    PV_napc_sha__testCase79(); napc_unmute(); napc_puts("passed!\n"); napc_mute();
     PV_napc_sha__testCase80(); napc_unmute(); napc_puts("passed!\n"); napc_mute();
     PV_napc_sha__testCase81(); napc_unmute(); napc_puts("passed!\n"); napc_mute();
+    PV_napc_sha__testCase82(); napc_unmute(); napc_puts("passed!\n"); napc_mute();
     napc_unmute();
     napc_puts("All sha tests have passed!\n");
     napc_mute();
 }
 void napc_writer__runTests(void) {
-    PV_napc_writer__testCase82(); napc_unmute(); napc_puts("passed!\n"); napc_mute();
     PV_napc_writer__testCase83(); napc_unmute(); napc_puts("passed!\n"); napc_mute();
     PV_napc_writer__testCase84(); napc_unmute(); napc_puts("passed!\n"); napc_mute();
     PV_napc_writer__testCase85(); napc_unmute(); napc_puts("passed!\n"); napc_mute();
     PV_napc_writer__testCase86(); napc_unmute(); napc_puts("passed!\n"); napc_mute();
     PV_napc_writer__testCase87(); napc_unmute(); napc_puts("passed!\n"); napc_mute();
     PV_napc_writer__testCase88(); napc_unmute(); napc_puts("passed!\n"); napc_mute();
+    PV_napc_writer__testCase89(); napc_unmute(); napc_puts("passed!\n"); napc_mute();
+    PV_napc_writer__testCase90(); napc_unmute(); napc_puts("passed!\n"); napc_mute();
+    PV_napc_writer__testCase91(); napc_unmute(); napc_puts("passed!\n"); napc_mute();
+    PV_napc_writer__testCase92(); napc_unmute(); napc_puts("passed!\n"); napc_mute();
     napc_unmute();
     napc_puts("All writer tests have passed!\n");
     napc_mute();

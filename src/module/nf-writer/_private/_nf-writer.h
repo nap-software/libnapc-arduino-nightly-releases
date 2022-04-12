@@ -21,33 +21,10 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#include <module/writer/_private/_writer.h>
+#if !defined(PV_NAPC_MODULE_NFWRITER_h)
+	#define PV_NAPC_MODULE_NFWRITER_h
 
-bool PV_napc_Writer_checkAccess(
-	napc__Writer *ctx, napc_size type_size, const char *type
-) {
-	NAPC_MAGIC_ASSERT(napc__Writer, ctx);
+	#include <module/nf-writer/nf-writer.h>
 
-	napc_size new_offset = ctx->_offset + type_size;
-
-	if (new_offset > ctx->size) {
-		PV_NAPC_WRITER_ERROR(
-			"Refusing to write type '%s' (size=%" NAPC_SIZE_PRINTF ") to buffer"
-			" (offset=%" NAPC_SIZE_PRINTF ",size=%" NAPC_SIZE_PRINTF ")",
-			type,
-			type_size,
-			ctx->_offset,
-			ctx->size
-		);
-
-		if (ctx->no_fail_mode) {
-			NAPC_PANIC(
-				"Write operation failed and no_fail_mode is set to true."
-			);
-		}
-
-		return false;
-	}
-
-	return true;
-}
+	#include <napc-utils/napc-utils.h>
+#endif

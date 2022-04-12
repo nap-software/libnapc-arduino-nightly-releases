@@ -2,7 +2,7 @@
 #include <napc.h>
 #include <napc-testing.h>
 
-void PV_napc_reader__testCase71(void) {
+void PV_napc_reader__testCase72(void) {
     napc_unmute();
     napc_puts("[reader/u16be.c] should read u16be correctly ... ");
     napc_mute();
@@ -19,7 +19,7 @@ void PV_napc_reader__testCase71(void) {
 	TEST_ASSERT(!napc_Reader_readU16BE(&ctx, &tmp));
 }
 
-void PV_napc_reader__testCase72(void) {
+void PV_napc_reader__testCase73(void) {
     napc_unmute();
     napc_puts("[reader/u16be.c] should read u16be correctly with out=NULL ... ");
     napc_mute();
