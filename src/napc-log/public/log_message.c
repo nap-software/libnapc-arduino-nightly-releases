@@ -23,9 +23,8 @@
 */
 #include <napc-log/_private/_napc-log.h>
 
-static char _message_buffer[1024]; // @static
+static char _message_buffer[256]; // @static
 static char _fn[64]; // @static
-static char _message_pad[128]; // @static
 
 static void _shortenFunctionName(const char *fn, char *buf) {
 	napc_size fn_len = napc_strlen(fn);
@@ -47,6 +46,29 @@ static void _shortenFunctionName(const char *fn, char *buf) {
 	buf[2] = '.';
 
 	buf[max - 1] = 0;
+}
+
+static void _callLogHandlers(
+	const char *subsys,
+	int level,
+	const char *function,
+	const char *message
+) {
+	// call log handler
+	for (napc_size i = 0; i < NAPC_ARRAY_ELEMENTS(PV_napc_log_handler_array); ++i) {
+		napc_logHandlerFunction handler = PV_napc_log_handler_array[i];
+		void *handler_context = PV_napc_log_handler_context_array[i];
+
+		if (handler) {
+			handler(
+				handler_context,
+				subsys,
+				level,
+				function,
+				message
+			);
+		}
+	}
 }
 
 void napc_logMessage(
@@ -80,7 +102,9 @@ void napc_logMessage(
 		va_end(args);
 	}
 
-	napc_snprintf(_message_pad, sizeof(_message_pad), "%105s", "");
+	_callLogHandlers(
+		subsys, level, function, _message_buffer
+	);
 
 	for (napc_size i = 0; i < napc_strlen(_message_buffer); ++i) {
 		const char ch = _message_buffer[i];
@@ -88,7 +112,9 @@ void napc_logMessage(
 		napc_putc(ch);
 
 		if (ch == '\n') {
-			napc_puts(_message_pad);
+			for (napc_size i = 0; i < 105; ++i) {
+				napc_putc(' ');
+			}
 		}
 	}
 

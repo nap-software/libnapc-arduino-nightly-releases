@@ -21,32 +21,25 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#include <module/mem/_private/_mem.h>
+#include <napc-log/_private/_napc-log.h>
 
-void napc_mem_releaseSharedBuffer(
-	napc__Buffer *buffer
+napc_ssize napc_addLogHandlerFunction(
+	napc_logHandlerFunction handler, void *context
 ) {
-	PV_napc__MemSharedBuffer *target = NULL;
+	napc_ssize next_handler = -1;
 
-	for (napc_size i = 0; i < NAPC_ARRAY_ELEMENTS(PV_napc_mem_shared_buffer_slots); ++i) {
-		PV_napc__MemSharedBuffer *e = &PV_napc_mem_shared_buffer_slots[i];
-
-		// ignore uninitialized entries
-		if (!e->label) continue;
-		if (&e->buffer != buffer) continue;
-
-		target = e;
+	for (napc_size i = 0; i < NAPC_ARRAY_ELEMENTS(PV_napc_log_handler_array); ++i) {
+		if (PV_napc_log_handler_array[i] == NULL) {
+			next_handler = i;
+		}
 	}
 
-	if (!target) {
-		NAPC_PANIC(
-			"Invalid buffer passed to napc_mem_releaseSharedBuffer()."
-		);
-	} else if (target->available) {
-		NAPC_PANIC(
-			"Cannot release an unclaimed shared buffer."
-		);
+	if (next_handler == -1) {
+		return -1;
 	}
 
-	target->available = true;
+	PV_napc_log_handler_array[next_handler] = handler;
+	PV_napc_log_handler_context_array[next_handler] = context;
+
+	return next_handler;
 }

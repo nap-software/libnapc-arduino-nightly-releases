@@ -21,6 +21,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#include <module/mem/_private/_mem.h>
+#include <napc-log/_private/_napc-log.h>
 
-PV_napc__MemSharedBuffer PV_napc_mem_shared_buffer_slots[5]; // @global
+napc_logHandlerFunction PV_napc_log_handler_array[5]; // @global
+void *PV_napc_log_handler_context_array[5]; // @global

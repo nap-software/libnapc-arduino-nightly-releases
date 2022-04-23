@@ -50,10 +50,10 @@
 * 
 * Reference at https://libnapc.nap-software/
 * 
-* Version    : nightly-2479393
+* Version    : nightly-e57f872
 * Git branch : nightly
-* Git head   : 2479393247ac0d7772fc9c1ce78e8d771b899f18
-* Build date : 12.04.2022 04:18:06
+* Git head   : e57f872b7bd6c5093b66d03d83105fd7a9c9dc0b
+* Build date : 23.04.2022 17:02:02
 */
 #if !defined(NAPC_h)
 	#define NAPC_h
@@ -1346,6 +1346,40 @@
     		const char *function,
     		const char *fmt, ...
     	) NAPC_FN_PRINTFLIKE(4, 5);
+    
+    	typedef void (*napc_logHandlerFunction)(
+    		void *context,
+    		const char *subsys,
+    		int level,
+    		const char *function,
+    		const char *message
+    	);
+    
+    	/*!
+    	 * @name napc_addLogHandlerFunction
+    	 * @brief Add log handler function
+    	 * @version 2.0.0
+    	 * @param handler The log handler function
+    	 * @param context Context to be passed to function
+    	 * @return
+    	 * On success a number that can be passed to `napc_removeLogHandlerFunction`.
+    	 * Otherwise a negative number is returned.
+    	 * @changelog 2.0.0 12.04.2022 initial version
+    	 */
+    	napc_ssize napc_addLogHandlerFunction(
+    		napc_logHandlerFunction handler, void *context
+    	);
+    
+    	/*!
+    	 * @name napc_removeLogHandlerFunction
+    	 * @brief Remove a log handler function
+    	 * @version 2.0.0
+    	 * @param log_handler_index Handler index returned by `napc_addLogHandlerFunction`
+    	 * @changelog 2.0.0 12.04.2022 initial version
+    	 */
+    	void napc_removeLogHandlerFunction(
+    		napc_size log_handler_index
+    	);
     
     	/*!
     	 * @name NAPC_LEVEL_VERBOSE
@@ -3447,7 +3481,9 @@
     	 */
     	napc__Writer napc_Writer_create(void *data, napc_size data_size);
     
-    	/*!
+    	/**
+    	 * PRIVATE API CALL
+    	 * 
     	 * @name napc_Writer_setNoFailMode
     	 * @brief Set no fail mode.
     	 * @version 2.0.0
@@ -3459,9 +3495,9 @@
     	 * @return Returns the previous no-fail mode value.
     	 * @changelog 2.0.0 12.04.2022 initial version
     	 */
-    	bool napc_Writer_setNoFailMode(
-    		napc__Writer *ctx, bool mode
-    	);
+    	//bool napc_Writer_setNoFailMode(
+    	//	napc__Writer *ctx, bool mode
+    	//);
     
     	/*!
     	 * @name napc_Writer_moveCurrentOffsetByAmount
@@ -4194,7 +4230,7 @@
         	 * @version 1.0.0
         	 * @enum NAPC_DNS_OPCODE_QUERY Standard DNS-Query.
         	 * @enum NAPC_DNS_OPCODE_IQUERY Inverse DNS-Query.
-        	 * @enum NAPC_DNS_OPCODE_STATUS Status op.
+        	 * @enum NAPC_DNS_OPCODE_STATUS Status query.
         	 * @enum NAPC_DNS_OPCODE_NOTIFY
         	 * @enum NAPC_DNS_OPCODE_UPDATE
         	 */
@@ -4209,7 +4245,8 @@
         	/*!
         	 * @name napc__DNSHeader
         	 * @brief Representation of a DNS header.
-        	 * @version 1.0.0
+        	 * @version 2.0.0
+        	 * @field raw_flags Contains the raw dns header flags (16 bit)
         	 * @field opcode DNS operation code. See `napc__DNSOPCode`.
         	 * @field authoritative_answer Authoritative answer flag.
         	 * @field truncated Truncated flag.
@@ -4218,8 +4255,11 @@
         	 * @field question_count Number of DNS queries.
         	 * @field answer_count Number of DNS answers.
         	 * @changelog 1.0.0 17.02.2022 initial version
+        	 * @changelog 2.0.0 12.04.2022 added `raw_flags` member
         	 */
         	typedef struct {
+        		napc_u16 raw_flags;
+        
         		napc__DNSOPCode opcode;
         
         		bool authoritative_answer;
@@ -4316,12 +4356,19 @@
             	 * @brief Representation of DNS query type.
             	 * @version 1.0.0
             	 * @enum NAPC_DNS_QTYPE_A A-Record query
+            	 * @enum NAPC_DNS_QTYPE_CNAME CNAME-Record query
+            	 * @enum NAPC_DNS_QTYPE_MX MX-Record query
+            	 * @enum NAPC_DNS_QTYPE_TXT TXT-Record query
             	 * @enum NAPC_DNS_QTYPE_AAAA AAAA-Record query
             	 * @changelog 1.0.0 17.02.2022 initial version
+            	 * @changelog 2.0.0 14.04.2022 added CNAME,MX and TXT types
             	 */
             	typedef enum {
-            		NAPC_DNS_QTYPE_A    = 1,
-            		NAPC_DNS_QTYPE_AAAA = 28
+            		NAPC_DNS_QTYPE_A     = 1,
+            		NAPC_DNS_QTYPE_CNAME = 5,
+            		NAPC_DNS_QTYPE_MX    = 15,
+            		NAPC_DNS_QTYPE_TXT   = 16,
+            		NAPC_DNS_QTYPE_AAAA  = 28
             	} napc__DNSQType;
             #endif
         
@@ -4372,6 +4419,8 @@
 /* original: #include <libnapc.h> */
 /* header file already included */
         
+        	#define NAPC_MODULE_DNS_MAX_RD_DATA_LENGTH 16u
+        
         	/*!
         	 * @name napc__DNSAnswer
         	 * @brief Representation of a DNS answer.
@@ -4385,7 +4434,7 @@
         		napc_u32 ttl;
         
         		napc_u16 rd_length;
-        		napc_u8 rd_data[16];
+        		napc_u8 rd_data[NAPC_MODULE_DNS_MAX_RD_DATA_LENGTH];
         	} napc__DNSAnswer;
         #endif
     
@@ -4459,179 +4508,6 @@
     		napc__DNSResponse *out,
     		const void *buffer, napc_size buffer_size
     	) NAPC_FN_WARNUNUSED_RET();
-    #endif
-
-/* original: #include <module/mem/mem.h> */
-    /*
-    * MIT License
-    * 
-    * Copyright (c) 2022 nap.software
-    * 
-    * Permission is hereby granted, free of charge, to any person obtaining a copy
-    * of this software and associated documentation files (the "Software"), to deal
-    * in the Software without restriction, including without limitation the rights
-    * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    * copies of the Software, and to permit persons to whom the Software is
-    * furnished to do so, subject to the following conditions:
-    * 
-    * The above copyright notice and this permission notice shall be included in all
-    * copies or substantial portions of the Software.
-    * 
-    * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-    * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-    * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-    * SOFTWARE.
-    */
-    #if !defined(NAPC_MODULE_MEM_h)
-    	#define NAPC_MODULE_MEM_h
-    
-
-/* original: #include <libnapc.h> */
-/* header file already included */
-    
-
-/* original: #include <module/buffer/buffer.h> */
-        /*
-        * MIT License
-        * 
-        * Copyright (c) 2022 nap.software
-        * 
-        * Permission is hereby granted, free of charge, to any person obtaining a copy
-        * of this software and associated documentation files (the "Software"), to deal
-        * in the Software without restriction, including without limitation the rights
-        * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-        * copies of the Software, and to permit persons to whom the Software is
-        * furnished to do so, subject to the following conditions:
-        * 
-        * The above copyright notice and this permission notice shall be included in all
-        * copies or substantial portions of the Software.
-        * 
-        * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-        * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-        * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-        * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-        * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-        * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-        * SOFTWARE.
-        */
-        /*!
-         * @name Buffer:intro
-         * @description
-         * To reduce parameter count this module is used to pass a buffer with its size to a function:
-         * 
-         * ```c
-         * char data[512];
-         * napc__Buffer buffer;
-         * 
-         * napc_Buffer_init(&buffer, data, sizeof(data));
-         * ```
-         */
-        #if !defined(NAPC_MODULE_BUFFER_h)
-        	#define NAPC_MODULE_BUFFER_h
-        
-
-/* original: #include <libnapc.h> */
-/* header file already included */
-        
-
-/* original: #include <napc-magic/napc-magic.h> */
-/* header file already included */
-        
-        	/*!
-        	 * @name napc__Buffer
-        	 * @brief Representation of a memory buffer.
-        	 * @version 1.0.0
-        	 * @field size Size of data.
-        	 * @field data Pointer to data.
-        	 * @changelog 1.0.0 17.02.2022 initial version
-        	 */
-        	typedef struct {
-        		NAPC_MAGIC_MEMBER; // used to detect uninitialized buffers
-        
-        		napc_size size;
-        		void *data;
-        	} napc__Buffer;
-        
-        	/*!
-        	 * @name napc_Buffer_init
-        	 * @brief Initialize a buffer.
-        	 * @version 1.0.0
-        	 * @description
-        	 * Initialize a buffer.
-        	 * @param buffer Pointer to napc__Buffer instance to be initialized.
-        	 * @param data Pointer to data.
-        	 * @param data_size Size of data.
-        	 * @changelog 1.0.0 17.02.2022 initial version
-        	 * @example
-        	 * char message[512];
-        	 * napc__Buffer buffer;
-        	 * 
-        	 * napc_Buffer_init(&buffer, message, sizeof(message));
-        	 */
-        	void napc_Buffer_init(
-        		napc__Buffer *buffer, void *data, napc_size data_size
-        	);
-        
-        	/*!
-        	 * @name napc_Buffer_create
-        	 * @brief Create a buffer.
-        	 * @version 1.0.0
-        	 * @description
-        	 * Create a buffer.
-        	 * @param data Pointer to data.
-        	 * @param data_size Size of data.
-        	 * @return Returns an initialized buffer.
-        	 * @changelog 1.0.0 17.02.2022 initial version
-        	 * @example
-        	 * char message[512];
-        	 * 
-        	 * napc__Buffer buffer = napc_Buffer_create(message, sizeof(message));
-        	 */
-        	napc__Buffer napc_Buffer_create(void *data, napc_size data_size);
-        #endif
-    
-    	/*!
-    	 * @name napc_mem_registerSharedBuffer
-    	 * @version 1.0.0
-    	 * @description
-    	 * Registers a global shared buffer.
-    	 * @param label Label of shared buffer.
-    	 * @param buffer Buffer start address.
-    	 * @param buffer_size Size of `buffer`.
-    	 * @changelog 1.0.0 17.02.2022 initial version
-    	 */
-    	void napc_mem_registerSharedBuffer(
-    		const char *label, void *buffer, napc_size buffer_size
-    	);
-    
-    	/*!
-    	 * @name napc_mem_claimSharedBuffer
-    	 * @version 1.0.0
-    	 * @description
-    	 * Claim the shared buffer `label` making it unavailable to other callers until
-    	 * it is released.
-    	 * @param label The shared buffer to be claimed.
-    	 * @param out `napc__Buffer` object to place buffer address and size in.
-    	 * @changelog 1.0.0 17.02.2022 initial version
-    	 */
-    	void napc_mem_claimSharedBuffer(
-    		const char *label, napc__Buffer **out
-    	);
-    
-    	/*!
-    	 * @name napc_mem_releaseSharedBuffer
-    	 * @version 1.0.0
-    	 * @description
-    	 * Release a shared buffer making it available for others again.
-    	 * @param buffer The buffer to be released.
-    	 * @changelog 1.0.0 17.02.2022 initial version
-    	 */
-    	void napc_mem_releaseSharedBuffer(
-    		napc__Buffer *buffer
-    	);
     #endif
 
 /* original: #include <module/sha/sha.h> */
@@ -4865,7 +4741,104 @@
 /* header file already included */
 
 /* original: #include <module/buffer/buffer.h> */
+        /*
+        * MIT License
+        * 
+        * Copyright (c) 2022 nap.software
+        * 
+        * Permission is hereby granted, free of charge, to any person obtaining a copy
+        * of this software and associated documentation files (the "Software"), to deal
+        * in the Software without restriction, including without limitation the rights
+        * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        * copies of the Software, and to permit persons to whom the Software is
+        * furnished to do so, subject to the following conditions:
+        * 
+        * The above copyright notice and this permission notice shall be included in all
+        * copies or substantial portions of the Software.
+        * 
+        * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        * SOFTWARE.
+        */
+        /*!
+         * @name Buffer:intro
+         * @description
+         * To reduce parameter count this module is used to pass a buffer with its size to a function:
+         * 
+         * ```c
+         * char data[512];
+         * napc__Buffer buffer;
+         * 
+         * napc_Buffer_init(&buffer, data, sizeof(data));
+         * ```
+         */
+        #if !defined(NAPC_MODULE_BUFFER_h)
+        	#define NAPC_MODULE_BUFFER_h
+        
+
+/* original: #include <libnapc.h> */
 /* header file already included */
+        
+
+/* original: #include <napc-magic/napc-magic.h> */
+/* header file already included */
+        
+        	/*!
+        	 * @name napc__Buffer
+        	 * @brief Representation of a memory buffer.
+        	 * @version 1.0.0
+        	 * @field size Size of data.
+        	 * @field data Pointer to data.
+        	 * @changelog 1.0.0 17.02.2022 initial version
+        	 */
+        	typedef struct {
+        		NAPC_MAGIC_MEMBER; // used to detect uninitialized buffers
+        
+        		napc_size size;
+        		void *data;
+        	} napc__Buffer;
+        
+        	/*!
+        	 * @name napc_Buffer_init
+        	 * @brief Initialize a buffer.
+        	 * @version 1.0.0
+        	 * @description
+        	 * Initialize a buffer.
+        	 * @param buffer Pointer to napc__Buffer instance to be initialized.
+        	 * @param data Pointer to data.
+        	 * @param data_size Size of data.
+        	 * @changelog 1.0.0 17.02.2022 initial version
+        	 * @example
+        	 * char message[512];
+        	 * napc__Buffer buffer;
+        	 * 
+        	 * napc_Buffer_init(&buffer, message, sizeof(message));
+        	 */
+        	void napc_Buffer_init(
+        		napc__Buffer *buffer, void *data, napc_size data_size
+        	);
+        
+        	/*!
+        	 * @name napc_Buffer_create
+        	 * @brief Create a buffer.
+        	 * @version 1.0.0
+        	 * @description
+        	 * Create a buffer.
+        	 * @param data Pointer to data.
+        	 * @param data_size Size of data.
+        	 * @return Returns an initialized buffer.
+        	 * @changelog 1.0.0 17.02.2022 initial version
+        	 * @example
+        	 * char message[512];
+        	 * 
+        	 * napc__Buffer buffer = napc_Buffer_create(message, sizeof(message));
+        	 */
+        	napc__Buffer napc_Buffer_create(void *data, napc_size data_size);
+        #endif
     
     	/*!
     	 * @name napc__UDPSocket

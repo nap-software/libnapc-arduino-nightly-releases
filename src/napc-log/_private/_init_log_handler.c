@@ -21,25 +21,10 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#include <module/mem/_private/_mem.h>
+#include <napc-log/_private/_napc-log.h>
 
-void napc_mem_claimSharedBuffer(
-	const char *label, napc__Buffer **out
-) {
-	PV_napc__MemSharedBuffer *e = PV_napc_mem_getSharedBufferByLabel(label);
-
-	if (!e) {
-		NAPC_PANIC(
-			"There is no shared buffer with label '%s'.",
-			label
-		);
-	} else if (!e->available) {
-		NAPC_PANIC(
-			"Shared buffer cannot be claimed as it was already claimed"
-			" by some other piece of code."
-		);
+void PV_napc_initLogHandler(void) {
+	for (napc_size i = 0; i < NAPC_ARRAY_ELEMENTS(PV_napc_log_handler_array); ++i) {
+		PV_napc_log_handler_array[i] = NULL;
 	}
-
-	e->available = false;
-	*out = &e->buffer;
 }

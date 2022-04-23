@@ -21,16 +21,18 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#include <module/mem/_private/_mem.h>
+#include <napc-log/_private/_napc-log.h>
 
-napc_size PV_napc_mem_countSharedBufferSlots(void) {
-	napc_size num = 0;
+void napc_removeLogHandlerFunction(
+	napc_size log_handler_index
+) {
+	NAPC_ASSERT(5 > log_handler_index);
 
-	for (napc_size i = 0; i < NAPC_ARRAY_ELEMENTS(PV_napc_mem_shared_buffer_slots); ++i) {
-		if (PV_napc_mem_shared_buffer_slots[i].label) {
-			++num;
-		}
+	if (PV_napc_log_handler_array[log_handler_index] == NULL) {
+		NAPC_PANIC(
+			"Trying to remove already removed log handler."
+		);
 	}
 
-	return num;
+	PV_napc_log_handler_array[log_handler_index] = NULL;
 }

@@ -3,6 +3,7 @@
  */
 void napc_puts(const char *str);
 void HAL_napc_initSerial(void);
+void PV_napc_initLogHandler(void);
 void HAL_napc_initTime(void);
 void HAL_napc_initRandomBitSources(void);
 void PV_napc_random_initPool(void);
@@ -10,11 +11,13 @@ void HAL_napc_initFileSystem(void);
 void HAL_napc_initFileSystemHandlesPool(void);
 void HAL_napc_initEthernet(void);
 void HAL_napc_UDP_initSocketPool(void);
-void PV_napc_mem_initSharedBufferSlots(void);
 
 void libnapc_callBootFunctions(void) {
     HAL_napc_initSerial();
     napc_puts("[boot] called HAL_napc_initSerial (pri=0)\n");
+
+    PV_napc_initLogHandler();
+    napc_puts("[boot] called PV_napc_initLogHandler (pri=2)\n");
 
     HAL_napc_initTime();
     napc_puts("[boot] called HAL_napc_initTime (pri=20)\n");
@@ -36,9 +39,6 @@ void libnapc_callBootFunctions(void) {
 
     HAL_napc_UDP_initSocketPool();
     napc_puts("[boot] called HAL_napc_UDP_initSocketPool (pri=61)\n");
-
-    PV_napc_mem_initSharedBufferSlots();
-    napc_puts("[boot] called PV_napc_mem_initSharedBufferSlots (pri=99)\n");
 
     napc_puts("[boot] calling into napc_main() now.\n");
 }

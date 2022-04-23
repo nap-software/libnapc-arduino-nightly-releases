@@ -83,7 +83,9 @@
 	 */
 	napc__Writer napc_Writer_create(void *data, napc_size data_size);
 
-	/*!
+	/**
+	 * PRIVATE API CALL
+	 * 
 	 * @name napc_Writer_setNoFailMode
 	 * @brief Set no fail mode.
 	 * @version 2.0.0
@@ -95,9 +97,9 @@
 	 * @return Returns the previous no-fail mode value.
 	 * @changelog 2.0.0 12.04.2022 initial version
 	 */
-	bool napc_Writer_setNoFailMode(
-		napc__Writer *ctx, bool mode
-	);
+	//bool napc_Writer_setNoFailMode(
+	//	napc__Writer *ctx, bool mode
+	//);
 
 	/*!
 	 * @name napc_Writer_moveCurrentOffsetByAmount

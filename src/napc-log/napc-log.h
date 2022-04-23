@@ -33,6 +33,40 @@
 		const char *fmt, ...
 	) NAPC_FN_PRINTFLIKE(4, 5);
 
+	typedef void (*napc_logHandlerFunction)(
+		void *context,
+		const char *subsys,
+		int level,
+		const char *function,
+		const char *message
+	);
+
+	/*!
+	 * @name napc_addLogHandlerFunction
+	 * @brief Add log handler function
+	 * @version 2.0.0
+	 * @param handler The log handler function
+	 * @param context Context to be passed to function
+	 * @return
+	 * On success a number that can be passed to `napc_removeLogHandlerFunction`.
+	 * Otherwise a negative number is returned.
+	 * @changelog 2.0.0 12.04.2022 initial version
+	 */
+	napc_ssize napc_addLogHandlerFunction(
+		napc_logHandlerFunction handler, void *context
+	);
+
+	/*!
+	 * @name napc_removeLogHandlerFunction
+	 * @brief Remove a log handler function
+	 * @version 2.0.0
+	 * @param log_handler_index Handler index returned by `napc_addLogHandlerFunction`
+	 * @changelog 2.0.0 12.04.2022 initial version
+	 */
+	void napc_removeLogHandlerFunction(
+		napc_size log_handler_index
+	);
+
 	/*!
 	 * @name NAPC_LEVEL_VERBOSE
 	 * @version 1.0.0
