@@ -2,7 +2,7 @@
 #include <napc.h>
 #include <napc-testing.h>
 
-void PV_napc_reader__testCase62(void) {
+void PV_napc_reader__testCase63(void) {
     napc_unmute();
     napc_puts("[reader/get_current_address.c] should work as expected ... ");
     napc_mute();

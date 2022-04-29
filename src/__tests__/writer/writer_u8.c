@@ -2,7 +2,7 @@
 #include <napc.h>
 #include <napc-testing.h>
 
-void PV_napc_writer__testCase92(void) {
+void PV_napc_writer__testCase93(void) {
     napc_unmute();
     napc_puts("[writer/u8.c] should write u8 correctly ... ");
     napc_mute();

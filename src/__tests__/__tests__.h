@@ -6,6 +6,7 @@
     #endif
     void napc_aes__runTests(void);
     void napc_dns__runTests(void);
+    void napc_eth__runTests(void);
     void napc_hmac__runTests(void);
     void napc_misc__runTests(void);
     void napc_parser__runTests(void);

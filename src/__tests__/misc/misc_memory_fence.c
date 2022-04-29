@@ -2,7 +2,7 @@
 #include <napc.h>
 #include <napc-testing.h>
 
-void PV_napc_misc__testCase10(void) {
+void PV_napc_misc__testCase11(void) {
     napc_unmute();
     napc_puts("[misc/memory_fence.c] should work properly ... ");
     napc_mute();

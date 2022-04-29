@@ -2,7 +2,7 @@
 #include <napc.h>
 #include <napc-testing.h>
 
-void PV_napc_hmac__testCase8(void) {
+void PV_napc_hmac__testCase9(void) {
     napc_unmute();
     napc_puts("[hmac/verify.c] It should work properly ... ");
     napc_mute();

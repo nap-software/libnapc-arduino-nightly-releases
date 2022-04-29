@@ -2,7 +2,7 @@
 #include <napc.h>
 #include <napc-testing.h>
 
-void PV_napc_parser__testCase35(void) {
+void PV_napc_parser__testCase36(void) {
     napc_unmute();
     napc_puts("[parser/parse_hex_string.c] It should work properly ... ");
     napc_mute();

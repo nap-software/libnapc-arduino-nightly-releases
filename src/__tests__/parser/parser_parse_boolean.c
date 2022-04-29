@@ -5,7 +5,7 @@
 /**
  * True values
  */
-void PV_napc_parser__testCase12(void) {
+void PV_napc_parser__testCase13(void) {
     napc_unmute();
     napc_puts("[parser/parse_boolean.c] It should work properly (word true) ... ");
     napc_mute();
@@ -15,7 +15,7 @@ void PV_napc_parser__testCase12(void) {
 	TEST_ASSERT(out);
 }
 
-void PV_napc_parser__testCase13(void) {
+void PV_napc_parser__testCase14(void) {
     napc_unmute();
     napc_puts("[parser/parse_boolean.c] It should work properly (word trUe) ... ");
     napc_mute();
@@ -25,7 +25,7 @@ void PV_napc_parser__testCase13(void) {
 	TEST_ASSERT(out);
 }
 
-void PV_napc_parser__testCase14(void) {
+void PV_napc_parser__testCase15(void) {
     napc_unmute();
     napc_puts("[parser/parse_boolean.c] It should work properly (word yes) ... ");
     napc_mute();
@@ -35,7 +35,7 @@ void PV_napc_parser__testCase14(void) {
 	TEST_ASSERT(out);
 }
 
-void PV_napc_parser__testCase15(void) {
+void PV_napc_parser__testCase16(void) {
     napc_unmute();
     napc_puts("[parser/parse_boolean.c] It should work properly (word 1) ... ");
     napc_mute();
@@ -48,7 +48,7 @@ void PV_napc_parser__testCase15(void) {
 /**
  * False values
  */
-void PV_napc_parser__testCase16(void) {
+void PV_napc_parser__testCase17(void) {
     napc_unmute();
     napc_puts("[parser/parse_boolean.c] It should work properly (word false) ... ");
     napc_mute();
@@ -58,7 +58,7 @@ void PV_napc_parser__testCase16(void) {
 	TEST_ASSERT(!out);
 }
 
-void PV_napc_parser__testCase17(void) {
+void PV_napc_parser__testCase18(void) {
     napc_unmute();
     napc_puts("[parser/parse_boolean.c] It should work properly (word faLse) ... ");
     napc_mute();
@@ -68,7 +68,7 @@ void PV_napc_parser__testCase17(void) {
 	TEST_ASSERT(!out);
 }
 
-void PV_napc_parser__testCase18(void) {
+void PV_napc_parser__testCase19(void) {
     napc_unmute();
     napc_puts("[parser/parse_boolean.c] It should work properly (word no) ... ");
     napc_mute();
@@ -78,7 +78,7 @@ void PV_napc_parser__testCase18(void) {
 	TEST_ASSERT(!out);
 }
 
-void PV_napc_parser__testCase19(void) {
+void PV_napc_parser__testCase20(void) {
     napc_unmute();
     napc_puts("[parser/parse_boolean.c] It should work properly (word 0) ... ");
     napc_mute();
@@ -88,7 +88,7 @@ void PV_napc_parser__testCase19(void) {
 	TEST_ASSERT(!out);
 }
 
-void PV_napc_parser__testCase20(void) {
+void PV_napc_parser__testCase21(void) {
     napc_unmute();
     napc_puts("[parser/parse_boolean.c] It should work without output ... ");
     napc_mute();
@@ -97,7 +97,7 @@ void PV_napc_parser__testCase20(void) {
 	TEST_ASSERT(napc_parser_parseBoolean("0", NULL));
 }
 
-void PV_napc_parser__testCase21(void) {
+void PV_napc_parser__testCase22(void) {
     napc_unmute();
     napc_puts("[parser/parse_boolean.c] It should return false given an empty string ... ");
     napc_mute();
@@ -106,7 +106,7 @@ void PV_napc_parser__testCase21(void) {
 	TEST_ASSERT(!napc_parser_parseBoolean("", &out));
 }
 
-void PV_napc_parser__testCase22(void) {
+void PV_napc_parser__testCase23(void) {
     napc_unmute();
     napc_puts("[parser/parse_boolean.c] It should return false given an invalid string ... ");
     napc_mute();

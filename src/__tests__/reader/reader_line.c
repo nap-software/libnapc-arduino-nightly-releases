@@ -2,7 +2,7 @@
 #include <napc.h>
 #include <napc-testing.h>
 
-void PV_napc_reader__testCase65(void) {
+void PV_napc_reader__testCase66(void) {
     napc_unmute();
     napc_puts("[reader/line.c] It should work properly ... ");
     napc_mute();
@@ -26,7 +26,7 @@ void PV_napc_reader__testCase65(void) {
 	TEST_ASSERT(!napc_Reader_readLine(&ctx, line, sizeof(line)));
 }
 
-void PV_napc_reader__testCase66(void) {
+void PV_napc_reader__testCase67(void) {
     napc_unmute();
     napc_puts("[reader/line.c] It should work with a string that does not end with a new line ... ");
     napc_mute();
@@ -50,7 +50,7 @@ void PV_napc_reader__testCase66(void) {
 	TEST_ASSERT(!napc_Reader_readLine(&ctx, line, sizeof(line)));
 }
 
-void PV_napc_reader__testCase67(void) {
+void PV_napc_reader__testCase68(void) {
     napc_unmute();
     napc_puts("[reader/line.c] It should truncate properly ... ");
     napc_mute();
@@ -74,7 +74,7 @@ void PV_napc_reader__testCase67(void) {
 	TEST_ASSERT(!napc_Reader_readLine(&ctx, line, sizeof(line)));
 }
 
-void PV_napc_reader__testCase68(void) {
+void PV_napc_reader__testCase69(void) {
     napc_unmute();
     napc_puts("[reader/line.c] It should work with empty lines in between (bug #1) ... ");
     napc_mute();

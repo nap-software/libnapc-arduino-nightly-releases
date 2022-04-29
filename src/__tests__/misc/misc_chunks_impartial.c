@@ -10,7 +10,7 @@ static napc_ssize _readFunction(const void *data, napc_size data_size, void *con
 	return 31;
 }
 
-void PV_napc_misc__testCase9(void) {
+void PV_napc_misc__testCase10(void) {
     napc_unmute();
     napc_puts("[misc/chunks/impartial.c] should return false on impartial operation ... ");
     napc_mute();

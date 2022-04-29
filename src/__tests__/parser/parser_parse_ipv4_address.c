@@ -2,7 +2,7 @@
 #include <napc.h>
 #include <napc-testing.h>
 
-void PV_napc_parser__testCase48(void) {
+void PV_napc_parser__testCase49(void) {
     napc_unmute();
     napc_puts("[parser/parse_ipv4_address.c] It should work properly ... ");
     napc_mute();
@@ -15,14 +15,14 @@ void PV_napc_parser__testCase48(void) {
 	TEST_ASSERT(out[3] == 3);
 }
 
-void PV_napc_parser__testCase49(void) {
+void PV_napc_parser__testCase50(void) {
     napc_unmute();
     napc_puts("[parser/parse_ipv4_address.c] It should work without output ... ");
     napc_mute();
 	TEST_ASSERT(napc_parser_parseIPv4Address("123.25.54.3", NULL));
 }
 
-void PV_napc_parser__testCase50(void) {
+void PV_napc_parser__testCase51(void) {
     napc_unmute();
     napc_puts("[parser/parse_ipv4_address.c] It should return false for invalid formatted addresses ... ");
     napc_mute();

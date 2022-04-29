@@ -16,7 +16,7 @@ static unsigned char *addr_element2 = (unsigned char *)(&my_array[2]);
 static unsigned char *addr_element3 = (unsigned char *)(&my_array[3]);
 static unsigned char *addr_element4 = (unsigned char *)(&my_array[4]);
 
-void PV_napc_pool__testCase59(void) {
+void PV_napc_pool__testCase60(void) {
     napc_unmute();
     napc_puts("[pool/basic.c] should work correctly ... ");
     napc_mute();

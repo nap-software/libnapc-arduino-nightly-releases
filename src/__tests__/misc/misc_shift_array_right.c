@@ -7,7 +7,7 @@ struct test_element {
 	unsigned long value1;
 };
 
-void PV_napc_misc__testCase11(void) {
+void PV_napc_misc__testCase12(void) {
     napc_unmute();
     napc_puts("[misc/shift_array_right.c] should work properly ... ");
     napc_mute();

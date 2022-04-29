@@ -2,7 +2,7 @@
 #include <napc.h>
 #include <napc-testing.h>
 
-void PV_napc_reader__testCase60(void) {
+void PV_napc_reader__testCase61(void) {
     napc_unmute();
     napc_puts("[reader/char.c] should read chars correctly ... ");
     napc_mute();
@@ -21,7 +21,7 @@ void PV_napc_reader__testCase60(void) {
 	TEST_ASSERT(!napc_Reader_readChar(&ctx, &tmp));
 }
 
-void PV_napc_reader__testCase61(void) {
+void PV_napc_reader__testCase62(void) {
     napc_unmute();
     napc_puts("[reader/char.c] should read chars correctly with out=NULL ... ");
     napc_mute();

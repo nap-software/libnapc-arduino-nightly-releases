@@ -2,7 +2,7 @@
 #include <napc.h>
 #include <napc-testing.h>
 
-void PV_napc_writer__testCase85(void) {
+void PV_napc_writer__testCase86(void) {
     napc_unmute();
     napc_puts("[writer/get_end_address.c] should work as expected ... ");
     napc_mute();

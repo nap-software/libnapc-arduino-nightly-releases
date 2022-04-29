@@ -2,7 +2,7 @@
 #include <napc.h>
 #include <napc-testing.h>
 
-void PV_napc_reader__testCase69(void) {
+void PV_napc_reader__testCase70(void) {
     napc_unmute();
     napc_puts("[reader/string.c] should read strings correctly ... ");
     napc_mute();
@@ -22,7 +22,7 @@ void PV_napc_reader__testCase69(void) {
 	TEST_ASSERT(!napc_Reader_readString(&ctx, 1, out, sizeof(out)));
 }
 
-void PV_napc_reader__testCase70(void) {
+void PV_napc_reader__testCase71(void) {
     napc_unmute();
     napc_puts("[reader/string.c] should handle overflow (buffer) correctly ... ");
     napc_mute();
@@ -35,7 +35,7 @@ void PV_napc_reader__testCase70(void) {
 	TEST_ASSERT(!napc_Reader_readString(&ctx, 6, out, sizeof(out)));
 }
 
-void PV_napc_reader__testCase71(void) {
+void PV_napc_reader__testCase72(void) {
     napc_unmute();
     napc_puts("[reader/string.c] should handle overflow (out) correctly ... ");
     napc_mute();

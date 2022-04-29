@@ -2,7 +2,7 @@
 #include <napc.h>
 #include <napc-testing.h>
 
-void PV_napc_parser__testCase51(void) {
+void PV_napc_parser__testCase52(void) {
     napc_unmute();
     napc_puts("[parser/parse_key_value.c] It should work properly ... ");
     napc_mute();
@@ -13,7 +13,7 @@ void PV_napc_parser__testCase51(void) {
 	TEST_ASSERT(strcmp(value, "def") == 0);
 }
 
-void PV_napc_parser__testCase52(void) {
+void PV_napc_parser__testCase53(void) {
     napc_unmute();
     napc_puts("[parser/parse_key_value.c] It should truncate values properly ... ");
     napc_mute();
@@ -24,14 +24,14 @@ void PV_napc_parser__testCase52(void) {
 	TEST_ASSERT(strcmp(value, "wor") == 0);
 }
 
-void PV_napc_parser__testCase53(void) {
+void PV_napc_parser__testCase54(void) {
     napc_unmute();
     napc_puts("[parser/parse_key_value.c] It should work without output ... ");
     napc_mute();
 	TEST_ASSERT(napc_parser_parseKeyValue("abc,def", NULL, 0, NULL, 0));
 }
 
-void PV_napc_parser__testCase54(void) {
+void PV_napc_parser__testCase55(void) {
     napc_unmute();
     napc_puts("[parser/parse_key_value.c] It should work with multiple commas ... ");
     napc_mute();
@@ -42,7 +42,7 @@ void PV_napc_parser__testCase54(void) {
 	TEST_ASSERT(strcmp(value, "def,123") == 0);
 }
 
-void PV_napc_parser__testCase55(void) {
+void PV_napc_parser__testCase56(void) {
     napc_unmute();
     napc_puts("[parser/parse_key_value.c] It should return false for invalid formatted strings ... ");
     napc_mute();

@@ -2,7 +2,7 @@
 #include <napc.h>
 #include <napc-testing.h>
 
-void PV_napc_writer__testCase88(void) {
+void PV_napc_writer__testCase89(void) {
     napc_unmute();
     napc_puts("[writer/string.c] should write strings correctly ... ");
     napc_mute();

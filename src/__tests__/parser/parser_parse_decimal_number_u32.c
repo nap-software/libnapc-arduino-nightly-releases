@@ -2,7 +2,7 @@
 #include <napc.h>
 #include <napc-testing.h>
 
-void PV_napc_parser__testCase27(void) {
+void PV_napc_parser__testCase28(void) {
     napc_unmute();
     napc_puts("[parser/parse_decimal_number_u32.c] It should work properly ... ");
     napc_mute();
@@ -12,14 +12,14 @@ void PV_napc_parser__testCase27(void) {
 	TEST_ASSERT(out == NAPC_U32_LITERAL(1234));
 }
 
-void PV_napc_parser__testCase28(void) {
+void PV_napc_parser__testCase29(void) {
     napc_unmute();
     napc_puts("[parser/parse_decimal_number_u32.c] It should work without output ... ");
     napc_mute();
 	TEST_ASSERT(napc_parser_parseDecimalNumberU32("1234", NULL));
 }
 
-void PV_napc_parser__testCase29(void) {
+void PV_napc_parser__testCase30(void) {
     napc_unmute();
     napc_puts("[parser/parse_decimal_number_u32.c] It should return false given an empty string ... ");
     napc_mute();
@@ -28,7 +28,7 @@ void PV_napc_parser__testCase29(void) {
 	TEST_ASSERT(!napc_parser_parseDecimalNumberU32("", &out));
 }
 
-void PV_napc_parser__testCase30(void) {
+void PV_napc_parser__testCase31(void) {
     napc_unmute();
     napc_puts("[parser/parse_decimal_number_u32.c] It should return false given a string that contains non-numeric characters ... ");
     napc_mute();

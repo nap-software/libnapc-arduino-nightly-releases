@@ -50,10 +50,10 @@
 * 
 * Reference at https://libnapc.nap-software/
 * 
-* Version    : nightly-e57f872
+* Version    : nightly-5e5e7a4
 * Git branch : nightly
-* Git head   : e57f872b7bd6c5093b66d03d83105fd7a9c9dc0b
-* Build date : 23.04.2022 17:02:02
+* Git head   : 5e5e7a4330802cce23ff030745fca1cfb4fa7baa
+* Build date : 29.04.2022 23:43:50
 */
 #if !defined(NAPC_h)
 	#define NAPC_h
@@ -4656,7 +4656,33 @@
     	 */
     	void napc_eth_setGatewayAddress(const char *ip);
     
-    	//bool napc_eth__getBroadcastAddress(char *out, napc_size out_size) NAPC_FN_WARNUNUSED_RET();
+    	/*!
+    	 * @name napc_eth_calculateBroadcastAddress
+    	 * @brief Calulcate broadcast address of IP-address.
+    	 * @version 2.0.0
+    	 * @param ip IPv4-Address in format `a.b.c.d`.
+    	 * @param submask IPv4-Subnetmask in format `a.b.c.d`.
+    	 * @param out Output array.
+    	 * @param out_size Size of output array.
+    	 * @changelog 2.0.0 12.04.2022 initial version
+    	 * @example
+    	 * char broadcast_addr[32];
+    	 * 
+    	 * bool result = napc_eth_calculateBroadcastAddress(
+    	 *     "10.1.2.5",
+    	 *     "255.255.255.0",
+    	 *     broadcast_addr, sizeof(broadcast_addr)
+    	 * );
+    	 * 
+    	 * if (result) {
+    	 *     napc_printf("Broadcast address of 10.1.2.5 is %s\n", broadcast_addr);
+    	 * }
+    	 */
+    	bool napc_eth_calculateBroadcastAddress(
+    		const char *ip,
+    		const char *submask,
+    		char *out, napc_size out_size
+    	) NAPC_FN_WARNUNUSED_RET();
     #endif
 
 /* original: #include <hw.module/udp/udp.h> */
@@ -5302,6 +5328,7 @@
     #endif
     void napc_aes__runTests(void);
     void napc_dns__runTests(void);
+    void napc_eth__runTests(void);
     void napc_hmac__runTests(void);
     void napc_misc__runTests(void);
     void napc_parser__runTests(void);

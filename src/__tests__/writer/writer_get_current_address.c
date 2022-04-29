@@ -2,7 +2,7 @@
 #include <napc.h>
 #include <napc-testing.h>
 
-void PV_napc_writer__testCase84(void) {
+void PV_napc_writer__testCase85(void) {
     napc_unmute();
     napc_puts("[writer/get_current_address.c] should work as expected ... ");
     napc_mute();

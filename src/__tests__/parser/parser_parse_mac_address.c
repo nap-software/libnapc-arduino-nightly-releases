@@ -2,7 +2,7 @@
 #include <napc.h>
 #include <napc-testing.h>
 
-void PV_napc_parser__testCase56(void) {
+void PV_napc_parser__testCase57(void) {
     napc_unmute();
     napc_puts("[parser/parse_mac_address.c] It should work properly ... ");
     napc_mute();
@@ -17,14 +17,14 @@ void PV_napc_parser__testCase56(void) {
 	TEST_ASSERT(out[5] == 0x66);
 }
 
-void PV_napc_parser__testCase57(void) {
+void PV_napc_parser__testCase58(void) {
     napc_unmute();
     napc_puts("[parser/parse_mac_address.c] It should work without output ... ");
     napc_mute();
 	TEST_ASSERT(napc_parser_parseMACAddress("11:22:33:44:55:66", NULL));
 }
 
-void PV_napc_parser__testCase58(void) {
+void PV_napc_parser__testCase59(void) {
     napc_unmute();
     napc_puts("[parser/parse_mac_address.c] It should return false for invalid formatted addresses ... ");
     napc_mute();
