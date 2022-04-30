@@ -50,10 +50,10 @@
 * 
 * Reference at https://libnapc.nap-software/
 * 
-* Version    : nightly-5e5e7a4
+* Version    : nightly-0b7b2ce
 * Git branch : nightly
-* Git head   : 5e5e7a4330802cce23ff030745fca1cfb4fa7baa
-* Build date : 29.04.2022 23:43:50
+* Git head   : 0b7b2ce7d8c568a1a3ce5954261f93d8fdebcc62
+* Build date : 30.04.2022 01:07:09
 */
 #if !defined(NAPC_h)
 	#define NAPC_h
@@ -4372,7 +4372,7 @@
             	} napc__DNSQType;
             #endif
         
-        	#define NAPC_MODULE_DNS_MAX_NAME 254u
+        	#define NAPC_MODULE_DNS_MAX_NAME 64 // was 254 before
         
         	/*!
         	 * @name napc__DNSQuery
